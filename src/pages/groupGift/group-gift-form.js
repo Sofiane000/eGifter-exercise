@@ -18,6 +18,9 @@ function GroupGiftForm() {
     const [headerData, setHeaderData] = useState({ status: "", text: "" });
     const [disableBtn, setDisableBtn] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    const [imgChanged, setImgChanged] = useState(false);
+    const [priceChanged, setPriceChanged] = useState(false);
+
     const history = useHistory();
     const location = useLocation();
 
@@ -31,6 +34,7 @@ function GroupGiftForm() {
     };
 
     function handleImageClick(img) {
+        setImgChanged(true);
         let values = formik.values;
         values['image'] = img;
         formik.setValues({
@@ -41,6 +45,7 @@ function GroupGiftForm() {
     function handlePrice(value) {
         const min = Constants.GROUP_GIFT.NUMBER_WIDGET.MIN_PRICE;
         const max = Constants.GROUP_GIFT.NUMBER_WIDGET.MAX_PRICE;
+        setPriceChanged(true);
         if (Number(value) >= Number(min) && Number(value) <= Number(max)) {
             let values = formik.values;
             values['giftPrice'] = value;
@@ -55,10 +60,14 @@ function GroupGiftForm() {
         return re.test(String(email).toLowerCase());
     }
 
+    const initialValues = location?.state?.editData ? {
+        ...Constants.GROUP_GIFT.INITIAL_VALUES,
+        ...location.state.editData
+    } : {
+        ...Constants.GROUP_GIFT.INITIAL_VALUES,
+    };
     const formik = useFormik({
-        initialValues: {
-            ...Constants.GROUP_GIFT.INITIAL_VALUES
-        },
+        initialValues,
         validationSchema: validators.groupGift,
 
         onSubmit: () => {
@@ -70,8 +79,7 @@ function GroupGiftForm() {
         }
     });
 
-    function handleNext(e) {
-        e?.preventDefault();
+    function handleNext() {
         setSubmitting(true);
         console.log(formik.errors.email);
         formik.handleSubmit();
@@ -162,8 +170,8 @@ function GroupGiftForm() {
                             </form>
 
                             <div className={classes.inputContainer}>
-                                <button disabled={disableBtn} className={classes.nextButton}
-                                    onClick={(e) => { handleNext(e); }}>Next</button>
+                                <button disabled={!formik.dirty && !imgChanged && !priceChanged} className={classes.nextButton}
+                                    onClick={handleNext}>Next</button>
                             </div>
                         </div>
                     </div>
