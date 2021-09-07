@@ -1,0 +1,58 @@
+{
+  "createGroupGift": [
+    {
+      "giftName": "Partynight",
+      "name": "Sofiane May",
+      "email": "maysofiane@gmail.com",
+      "image": "https://eg-v3-demos.s3.amazonaws.com/coding-exercise/group-gift-image-1.jpg",
+      "giftPrice": "250",
+      "source": "ALIAS",
+      "id": 1
+    },
+    {
+      "giftName": "Partynight",
+      "name": "Sofiane May",
+      "email": "maysofiane@gmail.com",
+      "image": "https://eg-v3-demos.s3.amazonaws.com/coding-exercise/group-gift-image-1.jpg",
+      "giftPrice": "250",
+      "source": "ALIAS",
+      "id": 2
+    },
+    {
+      "giftName": "Partynight",
+      "name": "Sofiane May",
+      "email": "maysofiane@gmail.com",
+      "image": "https://eg-v3-demos.s3.amazonaws.com/coding-exercise/group-gift-image-1.jpg",
+      "giftPrice": "250",
+      "source": "ALIAS",
+      "id": 3
+    },
+    {
+      "giftName": "",
+      "name": "",
+      "email": "",
+      "image": "https://eg-v3-demos.s3.amazonaws.com/coding-exercise/group-gift-image-1.jpg",
+      "giftPrice": "250",
+      "source": "ALIAS",
+      "id": 4
+    },
+    {
+      "giftName": "",
+      "name": "",
+      "email": "",
+      "image": "https://eg-v3-demos.s3.amazonaws.com/coding-exercise/group-gift-image-1.jpg",
+      "giftPrice": "250",
+      "source": "ALIAS",
+      "id": 5
+    },
+    {
+      "giftName": "rr444",
+      "name": "Myself",
+      "email": "maysofiane@gmail.com",
+      "image": "https://eg-v3-demos.s3.amazonaws.com/coding-exercise/group-gift-image-4.jpg",
+      "giftPrice": "250",
+      "source": "ALIAS",
+      "id": 6
+    }
+  ]
+}

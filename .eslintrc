@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "import",
+    "react",
+    "react-hooks"
+  ],
+
+	"rules": {
+	  "semi": ["error", "always"],
+	  "react-hooks/exhaustive-deps": "warn"
+  },
+  "parser": "babel-eslint"
+}
+
