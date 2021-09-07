@@ -90,9 +90,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 3. Make sure that `dockerfile` file is added to the directory where you are deploying the docker container.
 
-4. To create a docker image, run `docker build -t eGifter .` on the location where u have add the dockerfile.
+4. To create a docker image, run `docker build -t eGifter-exercise .` on the location where u have add the dockerfile.
 
-5. To create a docker container, run `docker run -p 8000:80 -d --name eGifter egifter` on the location where u have add the dockerfile.
+5. To create a docker container, run `docker run -p 8000:80 -d --name eGifter-exercise egifter-exercise` on the location where u have add the dockerfile.
 
 ### `npm run build` fails to minify
 

@@ -1,16 +1,16 @@
-import { React, useState } from 'react';
-import Paper from '@material-ui/core/Paper';
-import { useHistory, withRouter, useLocation } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import { useFormik } from 'formik';
+import { React, useState } from 'react';
+import { useHistory, useLocation, withRouter } from 'react-router-dom';
 import Controls from '../../components/forms';
-import { useStartGroupGiftStyles } from '../../styles';
 import ImagePicker from "../../components/imagePicker/image-picker";
 import NumberPicker from '../../components/numberPicker/number-picker';
 import HeaderSection from "../../components/sections/header-section";
+import { useStartGroupGiftStyles } from '../../styles';
+import { isEmptyObj } from '../../utils/common';
 import Constants from '../../utils/constants';
 import validators from '../../validators';
-import { isEmptyObj } from '../../utils/common';
-import { useFormik } from 'formik';
 
 function GroupGiftForm() {
     const classes = useStartGroupGiftStyles();
@@ -20,10 +20,8 @@ function GroupGiftForm() {
     const [submitting, setSubmitting] = useState(false);
     const history = useHistory();
     const location = useLocation();
-    const editData = location.state?.editData;
 
     const handleStringFormat = (e) => {
-        debugger;
         let values = formik.values;
         values[e.target.name] = e.target.value.trim();
         formik.setValues({
@@ -59,8 +57,7 @@ function GroupGiftForm() {
 
     const formik = useFormik({
         initialValues: {
-            ...Constants.GROUP_GIFT.INITIAL_VALUES,
-            ...editData
+            ...Constants.GROUP_GIFT.INITIAL_VALUES
         },
         validationSchema: validators.groupGift,
 
@@ -70,33 +67,21 @@ function GroupGiftForm() {
                 status: "info",
                 text: "Submitting..."
             });
-            handleNext().catch(err => {
-                setDisableBtn(false);
-                setHeaderData({
-                    status: "warning",
-                    text: "Something went wrong!"
-                });
-            });
         }
     });
 
-    function handleNext() {
+    function handleNext(e) {
+        e?.preventDefault();
         setSubmitting(true);
-        debugger;
         console.log(formik.errors.email);
+        formik.handleSubmit();
+
         if (!isEmptyObj(formik.errors) && headerData.status !== "error") {
             setHeaderData({
                 status: "error",
                 text: "Please fill all the required(*) form fields before submitting."
             });
-        }
-        else if (headerData.status === "error" && isEmptyObj(formik.errors)) {
-            setHeaderData({
-                status: "",
-                text: ""
-            });
-        }
-        else {
+        } else {
             history.push({
                 pathname: "/groupGift/submitGroupGift",
                 state: { data: formik.values }
@@ -104,20 +89,13 @@ function GroupGiftForm() {
             );
         }
     }
+
     if (!isEmptyObj(formik.errors) && submitting && headerData.status !== "error") {
         setHeaderData({
             status: "error",
             text: "Please fill all the required(*) form fields before submitting."
         });
-    } else if (headerData.status === "error" && isEmptyObj(formik.errors)) {
-        setHeaderData({
-            status: "",
-            text: ""
-        });
     }
-
-
-
 
     return (
         <div className={classes.outerContainer}>
@@ -184,7 +162,8 @@ function GroupGiftForm() {
                             </form>
 
                             <div className={classes.inputContainer}>
-                                <button className={classes.nextButton} onClick={handleNext}>Next</button>
+                                <button disabled={disableBtn} className={classes.nextButton}
+                                    onClick={(e) => { handleNext(e); }}>Next</button>
                             </div>
                         </div>
                     </div>
