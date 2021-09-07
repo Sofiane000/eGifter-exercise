@@ -1,6 +1,5 @@
 
 import { createTheme, makeStyles } from "@material-ui/core/styles";
-import { findByLabelText } from "@testing-library/dom";
 
 export const theme = createTheme({
   palette: {
@@ -134,7 +133,8 @@ export const usePreviewGroupGiftStyles = makeStyles((theme) => ({
     marginTop: "20px"
   },
   successText: {
-    marginTop: "18px"
+    marginTop: "18px",
+    textAlign: "center"
   }
 
 }));

@@ -1,7 +1,8 @@
 import { Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { useFormik } from 'formik';
-import { React, useState } from 'react';
+import createHistory from 'history/createBrowserHistory';
+import { React, useEffect, useState } from 'react';
 import { useHistory, useLocation, withRouter } from 'react-router-dom';
 import Controls from '../../components/forms';
 import ImagePicker from "../../components/imagePicker/image-picker";
@@ -55,10 +56,14 @@ function GroupGiftForm() {
         }
     }
 
-    function validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
+    useEffect(() => {
+        const history = createHistory();
+        if (history.location.state && history.location.state.editData) {
+            let state = { ...history.location.state };
+            delete state.editData;
+            history.replace({ ...history.location, state });
+        }
+    }, []);
 
     const initialValues = location?.state?.editData ? {
         ...Constants.GROUP_GIFT.INITIAL_VALUES,
@@ -137,6 +142,7 @@ function GroupGiftForm() {
                                         id="giftName-id"
                                         name="giftName"
                                         label="Group Gift Name*"
+                                        className={classes.textFieldRoot}
                                         value={formik.values.giftName}
                                         error={formik.touched.giftName ? formik.errors.giftName : ""}
                                         onBlur={handleStringFormat}
@@ -150,6 +156,7 @@ function GroupGiftForm() {
                                         id="name-id"
                                         name="name"
                                         label="Your Name*"
+                                        className={classes.textFieldRoot}
                                         value={formik.values.name}
                                         error={formik.touched.name ? formik.errors.name : ""}
                                         onBlur={handleStringFormat}
@@ -162,6 +169,7 @@ function GroupGiftForm() {
                                         id="email-id"
                                         name="email"
                                         label="Your Email*"
+                                        className={classes.textFieldRoot}
                                         value={formik.values.email}
                                         error={formik.touched.email ? formik.errors.email : ""}
                                         onBlur={handleStringFormat}

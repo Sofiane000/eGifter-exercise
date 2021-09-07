@@ -1,14 +1,13 @@
-import { React, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { usePreviewGroupGiftStyles } from "../../styles";
 import { Paper, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import { useHistory, withRouter } from 'react-router-dom';
-import { createGroupGift } from "../../services/group-gift";
 import { withStyles } from "@material-ui/core/styles";
+import { React, useState } from 'react';
+import { useHistory, useLocation, withRouter } from 'react-router-dom';
+import { createGroupGift } from "../../services/group-gift";
+import { usePreviewGroupGiftStyles } from "../../styles";
 
 function PreviewGroupGift() {
     const classes = usePreviewGroupGiftStyles();
@@ -53,9 +52,8 @@ function PreviewGroupGift() {
                         <CardActionArea>
                             <CardMedia
                                 component="img"
-                                height="230"
                                 image={data?.image}
-                                title="Contemplative Reptile"
+
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h4">
